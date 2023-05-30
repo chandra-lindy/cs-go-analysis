@@ -17,6 +17,7 @@ class ProcessGameState():
     self.df['player'] = self.df['player'].astype('category')
 
 
+  # returns true if point is in area; false otherwise
   def is_point_in_area(self, vertices, x, y, z, z_lower_bound=285, z_upper_bound=421):
     j = len(vertices) - 1  # The last vertex is the 'previous' one to the first
 
@@ -33,6 +34,7 @@ class ProcessGameState():
     return result
 
 
+  # returns true if player has a weapon_class in inventory; false otherwise
   def has_weapon(self, inventory, weapon_class):
     if inventory is not None:
       for weapon in inventory:
@@ -41,11 +43,13 @@ class ProcessGameState():
     return False
 
 
+  # converts string clock time to int seconds
   def clock_time_to_seconds(self, clock_time):
     time = clock_time.split(':')
     return int(time[0]) * 60 + int(time[1])
 
 
+  # converts int seconds to string clock time
   def seconds_to_clock_time(self, seconds):
     minutes = seconds // 60
     seconds = seconds % 60
@@ -82,11 +86,11 @@ class ProcessGameState():
 
     result = f"""***** Answer to Question 2a *****
 
-    Out of {total_rounds} total rounds Team2 played as T, we only found {num_rounds} round where at least one of their players within the given area.
+    Out of {total_rounds} total rounds Team2 played as T, we only found {num_rounds} round where at least one of their players entered the given area.
 
     {num_rounds} / {total_rounds} = {percentage:.2%}
 
-    Therefor, entering via the light blue boundary is not a common strategy used by Team2 on T side.
+    Therefore, entering via the light blue boundary is not a common strategy used by Team2 on T side.
 
 
 
@@ -195,7 +199,7 @@ if __name__ == "__main__":
   z_lower_bound = 285
   z_upper_bound = 421
 
-  goodbye = """Thank you for the opportunity to participate in this assessment.  I thoroughly enjoyed the assignment.
+  goodbye = """Thank you for the opportunity to participate in this assessment.  I thoroughly enjoyed working on this project.  I hope to hear from you soon!
 
 
   """
@@ -204,7 +208,7 @@ if __name__ == "__main__":
 
   a. Is entering via the light blue boundary a common strategy used by Team2 on T (terrorist) side?
 
-  b. What is the average timer that Team2 on T (terrorist) side enters “BombsiteB” with least 2 rifles or SMGs?
+  b. What is the average timer that Team2 on T (terrorist) side enters “BombsiteB” with atleast 2 rifles or SMGs?
 
   c. Heatmap reflecting the locations where Team2 is found in Bombsite B at the beginning of each round.
 
